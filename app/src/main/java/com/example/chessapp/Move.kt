@@ -84,7 +84,7 @@ open class Move {
 
 
     // wandelt einen Bauern um, wenn dieser auf ein Promotion-Feld kommt
-    fun promotionPawn(piece: Player, board: Board, choices: String){
+    fun promotionPawn(piece: Player, board: Board, choices: String): Player {
         val newPiece =  if(choices == "Queen"){
             val sign = if(piece.sign.isLowerCase()) 'q'
             else 'Q'
@@ -107,6 +107,7 @@ open class Move {
         }
 
         board.piecePositions[piece.position] = newPiece
+        return newPiece
     }
 
 

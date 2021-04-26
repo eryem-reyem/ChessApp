@@ -1,7 +1,6 @@
 package com.example.chessapp
 
 import Game
-import Player
 
 interface ChessDelegate {
     val game: Game

@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(), ChessDelegate {
 
     lateinit var ivLogo: ImageView
 
+
     fun newGame(){
         game = Game()
         game.board.fen.fen2Board(game.board)
@@ -75,6 +76,7 @@ class MainActivity : AppCompatActivity(), ChessDelegate {
             gameActive = false
         }
     }
+
 
     fun promotionPawn(piece: Player){
         //promotionPawnView()
@@ -146,19 +148,23 @@ class MainActivity : AppCompatActivity(), ChessDelegate {
 
         // promotion Pawn Buttons
         findViewById<AppCompatImageButton>(R.id.btnQueen).setOnClickListener {
-            game.promotionPawn(piece!!, game.board, "Queen")
+            piece = game.promotionPawn(piece!!, game.board, "Queen")
+            checkStatus(piece!!)
             gameView()
         }
         findViewById<AppCompatImageButton>(R.id.btnRook).setOnClickListener {
-            game.promotionPawn(piece!!, game.board, "Rook")
+            piece = game.promotionPawn(piece!!, game.board, "Rook")
+            checkStatus(piece!!)
             gameView()
         }
         findViewById<AppCompatImageButton>(R.id.btnKnight).setOnClickListener {
-            game.promotionPawn(piece!!, game.board, "Knight")
+            piece = game.promotionPawn(piece!!, game.board, "Knight")
+            checkStatus(piece!!)
             gameView()
         }
         findViewById<AppCompatImageButton>(R.id.btnBishop).setOnClickListener {
-            game.promotionPawn(piece!!, game.board, "Bishop")
+            piece = game.promotionPawn(piece!!, game.board, "Bishop")
+            checkStatus(piece!!)
             gameView()
         }
     }
@@ -181,10 +187,10 @@ class MainActivity : AppCompatActivity(), ChessDelegate {
             possibleMoves.clear()
             if(setMove.first){
                 game.board.fen.saveFen(game.board, piece!!.color)
+                promotionPawn(piece!!)
                 checkStatus(piece!!)
                 setPlayer(game.board.fen.activeColor)
                 tvMove1.text = "Player 1: ${setMove.second}"
-                promotionPawn(piece!!)
                 clearCastelingPositions()
                 chessView.invalidate()
                 println(game.board.fen.castling)

@@ -111,6 +111,7 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         drawPieces(canvas)
         drawPossibleMoves(canvas)
 
+
         if(move && chessDelegate.gameActive) {
             chessDelegate.moveComputer()
             move = false

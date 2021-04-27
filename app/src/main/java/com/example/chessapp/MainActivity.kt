@@ -144,6 +144,7 @@ class MainActivity : AppCompatActivity(), ChessDelegate {
         // Reset Button
         findViewById<Button>(R.id.btnReset).setOnClickListener {
             newGame()
+            possibleMoves.clear()
             gameActive = true
             chessView.invalidate()
         }

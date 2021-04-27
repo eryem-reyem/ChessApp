@@ -4,6 +4,7 @@ import Game
 import King
 import Pawn
 import Player
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity(), ChessDelegate {
     }
 
 
+    @SuppressLint("SetTextI18n")
     fun checkStatus(piece: Player) {
         tvGameStatus.text = " "
         game.checkGamestatus(piece)
@@ -170,6 +172,7 @@ class MainActivity : AppCompatActivity(), ChessDelegate {
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun movePlayer(pos: Pair<Int, Int>): Boolean{
 
         val color = game.board.fen.activeColor.single()
@@ -219,6 +222,7 @@ class MainActivity : AppCompatActivity(), ChessDelegate {
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun moveComputer() {
         val move = game.moveComputer(game.board.fen.activeColor)
         piece = move.first

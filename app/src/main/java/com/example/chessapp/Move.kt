@@ -93,7 +93,7 @@ open class Move {
         else if(choices== "Rook"){
             val sign = if(piece.sign.isLowerCase()) 'r'
             else 'R'
-            Bishop(piece.position, sign, piece.color)
+            Rook(piece.position, sign, piece.color)
         }
         else if(choices== "Knight"){
             val sign = if(piece.sign.isLowerCase()) 'n'
@@ -103,7 +103,7 @@ open class Move {
         else {
             val sign = if(piece.sign.isLowerCase()) 'b'
             else 'B'
-            Rook(piece.position, sign, piece.color)
+            Bishop(piece.position, sign, piece.color)
         }
 
         board.piecePositions[piece.position] = newPiece

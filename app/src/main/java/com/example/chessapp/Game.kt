@@ -73,14 +73,16 @@ class Game: Move(){
 
             val tempPossibleMoves = if(piece.color == 'w') tempPossibleMoves(board).second
                                     else tempPossibleMoves(board).first
-            var movesPossible = false
+            var moveCounter = 0
+
 
             for(a_piece in tempPossibleMoves){
-                if(a_piece.value.isNotEmpty()){
-                    movesPossible = true
-                }
+                val tempList = allPossibleMoves(board, a_piece.key)
+                moveCounter += tempList.size
+                if(moveCounter != 0) break
             }
-            if(!movesPossible){
+
+            if(moveCounter == 0){
                 gameActiv = false
                 return true
             }

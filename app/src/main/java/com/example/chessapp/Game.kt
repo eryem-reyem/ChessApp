@@ -1,3 +1,5 @@
+import Rating
+
 class Game: Move(){
     val board: Board = Board()
     var color: Char = 'w'
@@ -185,29 +187,64 @@ class Game: Move(){
     }
 
     fun moveComputer(activeColor: String): Pair<Player, String> {
+        val rating = Rating()
         while(true) {
             color = activeColor.single()
 
             player = if(activeColor == "w") "Player 1" else "Player 2"
 
-            val piece = board.piecePositions.entries.shuffled().first()
+            val tempMoves = tempPossibleMoves(board).second
+
+            var bestPiece = board.piecePositions[0]
+            var bestMove = Pair(0, 0)
+            var bestRating = 0
+
+            for(piece in tempMoves){
+
+                val possibleMoves = allPossibleMoves(board, piece.key)
+
+                for(move in possibleMoves){
+                    val result = rating.rate(board, move)
+
+                    if(result > bestRating){
+                        bestPiece = piece.key
+                        bestMove = move
+                        bestRating = result
+                    }
+                }
+            }
+
+            println(bestMove)
+            println(bestPiece)
+            println(bestRating)
+
+            if(bestRating == 0) {
+                val piece = board.piecePositions.entries.shuffled().first()
 
 
-            if(piece.value.color != color) continue
+                if (piece.value.color != color) continue
 
-            // Liste mit Positionen auf die das piece ziehen kann
-            possibleMoves = allPossibleMoves(board, piece.value)
+                // Liste mit Positionen auf die das piece ziehen kann
+                possibleMoves = allPossibleMoves(board, piece.value)
 
-            if(possibleMoves.isEmpty()) continue
+                if (possibleMoves.isEmpty()) continue
 
-            val move = possibleMoves.shuffled()[0]
+                val move = possibleMoves.shuffled()[0]
 
-            val setMove = setMove(move, possibleMoves, piece.value, board)
-            if (setMove.first) {
-                if (board.fen.castling == "") board.fen.castling = "-"
-                return Pair(piece.value, setMove.second)
-            } else println("Kein gültiger Zug!")
+                val setMove = setMove(move, possibleMoves, piece.value, board)
+                if (setMove.first) {
+                    if (board.fen.castling == "") board.fen.castling = "-"
+                    return Pair(piece.value, setMove.second)
+                } else println("Kein gültiger Zug!")
 
+            }else {
+                possibleMoves = allPossibleMoves(board, bestPiece!!)
+                val setMove = setMove(bestMove, possibleMoves, bestPiece!!, board)
+                if (setMove.first) {
+                    if (board.fen.castling == "") board.fen.castling = "-"
+                    return Pair(bestPiece!!, setMove.second)
+                }
+            }
         }
     }
 

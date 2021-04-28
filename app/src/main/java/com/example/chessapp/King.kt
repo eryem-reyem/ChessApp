@@ -10,6 +10,7 @@ class King(position: Pair<Int, Int>, sign: Char, override val color: Char = 'w')
         Pair(1, 0)
     )
     override val maxSteps: Int = 1
+    override val evaluation: Int = if(color == 'w') 900 else -900
     var castelingPositions = mutableListOf<Pair<Int, Int>>()
 
 

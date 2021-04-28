@@ -10,4 +10,5 @@ class Knight(position: Pair<Int, Int>, sign: Char, override val color: Char = 'w
         Pair(-2, -1)
     )
     override val maxSteps: Int = 1
+    override val evaluation: Int = if(color == 'w') 30 else -30
 }

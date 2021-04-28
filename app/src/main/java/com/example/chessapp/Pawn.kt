@@ -9,6 +9,7 @@ class Pawn(position: Pair<Int, Int>, sign: Char, override val color: Char = 'w')
         )
     }
     override val maxSteps: Int = 1
+    override val evaluation: Int = if(color == 'w') 10 else -10
 
     override fun getPossibleMoves(board: Board): MutableList<Pair<Int, Int>> {
         var possibleMoves = mutableListOf<Pair<Int, Int>>()

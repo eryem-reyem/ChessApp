@@ -3,6 +3,7 @@ abstract class Player(var position: Pair<Int, Int>, val sign: Char) {
     abstract val moves: List<Pair<Int, Int>>
     abstract val maxSteps: Int
     abstract val color: Char
+    abstract val evaluation: Int
 
 
 

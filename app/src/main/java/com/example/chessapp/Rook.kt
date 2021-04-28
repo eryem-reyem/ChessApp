@@ -6,4 +6,5 @@ class Rook(position: Pair<Int, Int>, sign: Char, override val color: Char = 'w')
         Pair(1, 0)
     )
     override val maxSteps: Int = 8
+    override val evaluation: Int = if(color == 'w') 50 else -50
 }
